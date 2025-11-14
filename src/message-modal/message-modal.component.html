@@ -1,0 +1,75 @@
+<div *ngIf="isOpen"
+     class="modal-backdrop"
+     [class.show]="showContent"
+     (click)="onBackdropClick($event)">
+
+  <div class="modal-container"
+       [class.show]="showContent"
+       [class.success]="type === 'success'"
+       [class.error]="type === 'error'"
+       [ngClass]="'bg-gradient-to-br ' + currentConfig.bgGradient + ' border-2 ' + currentConfig.borderColor"
+       (click)="$event.stopPropagation()">
+
+    <button class="close-button" (click)="onClose()">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="modal-content">
+      <div class="icon-container" [class.show]="showContent">
+        <div class="icon-blur-bg" [ngClass]="currentConfig.blurColor"></div>
+
+        <div class="icon-wrapper" [class.show]="showContent">
+          <svg *ngIf="type === 'success'"
+               [ngClass]="currentConfig.iconColor"
+               class="icon"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+
+          <svg *ngIf="type === 'error'"
+               [ngClass]="currentConfig.iconColor"
+               class="icon"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+
+        <div *ngIf="type === 'success' && showContent" class="particles">
+          <div class="particle particle-1" [ngClass]="currentConfig.particleColor1"></div>
+          <div class="particle particle-2" [ngClass]="currentConfig.particleColor2"></div>
+          <div class="particle particle-3" [ngClass]="currentConfig.particleColor3"></div>
+        </div>
+      </div>
+
+      <h2 class="modal-title" [class.show]="showContent">
+        {{ displayTitle }}
+      </h2>
+
+      <p *ngIf="message" class="modal-message" [class.show]="showContent">
+        {{ message }}
+      </p>
+
+      <div class="modal-actions" [class.show]="showContent">
+        <button
+          (click)="onClose()"
+          [ngClass]="currentConfig.buttonBg"
+          class="action-button">
+          OK, Entendi
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="autoClose"
+         class="progress-bar"
+         [class.show]="showContent"
+         [ngClass]="currentConfig.progressBg"
+         [style.animation-duration.ms]="autoCloseDelay">
+    </div>
+  </div>
+</div>
