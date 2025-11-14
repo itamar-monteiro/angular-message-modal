@@ -21,8 +21,15 @@
         <div class="icon-blur-bg" [ngClass]="currentConfig.blurColor"></div>
 
         <div class="icon-wrapper" [class.show]="showContent">
-
-          <svg *ngIf="type === 'success'" class="icon w-20 h-20 relative z-10"
+          <svg *ngIf="type === 'success'"
+               [ngClass]="currentConfig.iconColor"
+               class="icon"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <svg *ngIf="type === 'success'" class="icon"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
